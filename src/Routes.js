@@ -4,6 +4,7 @@ import SignIn from "./components/pages/signin/SignIn";
 import PrivateRoute from "./components/auth/PrivateRoute";
 import Dashboard from "./components/admin/dashboard/Dashboard";
 import Apartment from "./components/admin/apartment/Apartment";
+import Profile from "./components/admin/profile/Profile";
 
 const Routes = () => {
     return (
@@ -14,6 +15,9 @@ const Routes = () => {
                     <PrivateRoute>
                         <Route exact path="/client">
                             <Dashboard />
+                        </Route>
+                        <Route exact path="/profile">
+                            <Profile />
                         </Route>
                         {/* <Route exact path="/admin/apartment">
                             <Apartment />
