@@ -3,15 +3,9 @@ import React from "react";
 const Footer = () => {
   return (
     <>
-      <footer className="main-footer">
-        <strong>
-          Copyright © 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.
-        </strong>
-        All rights reserved.
-        <div className="float-right d-none d-sm-inline-block">
-          <b>Version</b> 3.2.0
-        </div>
-      </footer>
+       <footer class="footer">
+            © 2020 Elegent Admin by <a href="https://www.wrappixel.com/">wrappixel.com</a>
+        </footer>
     </>
   );
 };

@@ -2,8 +2,11 @@ import Routes from "./Routes";
 
 function App() {
   return (
-    <div className="d-flex flex-column flex-root">
+    <div className="skin-default-dark fixed-layout">
+      <div id="main-wrapper">
       <Routes />
+
+      </div>
     </div>
   );
 }
