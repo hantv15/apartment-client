@@ -1,35 +1,17 @@
-import React, { useState, useEffect } from 'react'
-import axios from 'axios';
 import Content from '../../core/Content';
+import {  isAuthenticated } from "../../auth";
 
 const Profile = () => {
-  const [profile, setProfile] = useState([]);
 
-  useEffect(() => {
-    getNewProfile()
-  }, []);
-
-  function getNewProfile() {
-    axios.get('http://apartment-system.xyz/api/apartment/13')
-      .then(async function (response) {
-        setProfile(response.data.data);
-        console.log(response.data);
-      }).catch(function (error) {
-        console.log(error);
-      })
-  }
-  if (!profile) {
-    return null;
-  }
+const { data } = isAuthenticated();
 
   return (
     <>
       <Content>
-      {profile.map((item) => (
-        <div className="page-wrapper" key={item}>
+        <div className="page-wrapper" >
 
           <div className="container-fluid">
-          
+
             <div className="row page-titles">
               <div className="col-md-5 align-self-center">
                 <h4 className="text-themecolor">Profile</h4>
@@ -77,25 +59,32 @@ const Profile = () => {
                       <div className="form-group">
                         <label className="col-md-12">Họ tên</label>
                         <div className="col-md-12">
-                          <input type="text" className="form-control form-control-line" value={item.name} />
+                          <input type="text" className="form-control form-control-line" value={data.name} />
                         </div>
                       </div>
                       <div className="form-group">
-                        <label htmlFor="example-email" className="col-md-12">Mã phòng</label>
+                        <label htmlFor="example-email" className="col-md-12">Email</label>
                         <div className="col-md-12">
-                          <input type="email"  className="form-control form-control-line" value={item.apartment_id}/>
+                          <input type="email" className="form-control form-control-line" value={data.email} />
                         </div>
                       </div>
-                      <div className="form-group">
-                        <label className="col-md-12">Diện tích</label>
-                        <div className="col-md-12">
-                          <input type="text" className="form-control form-control-line" value={item.square_meters +' mét vuông'} />
-                        </div>
-                      </div>
+                  
                       <div className="form-group">
                         <label className="col-md-12">Số điện thoại</label>
                         <div className="col-md-12">
-                          <input type="text" className="form-control form-control-line" value={item.phone_number} />
+                          <input type="text" className="form-control form-control-line" value={data.phone_number} />
+                        </div>
+                      </div>
+                      <div className="form-group">
+                        <label className="col-md-12">Tòa nhà</label>
+                        <div className="col-md-12">
+                          <input type="text" className="form-control form-control-line" value={data.building_id} />
+                        </div>
+                      </div>
+                      <div className="form-group">
+                        <label className="col-md-12">Số nhà</label>
+                        <div className="col-md-12">
+                          <input type="text" className="form-control form-control-line" value={data.apartment_id} />
                         </div>
                       </div>
                       {/* <div className="form-group">
@@ -129,9 +118,8 @@ const Profile = () => {
             </div>
 
           </div>
- 
+
         </div>
-))}
       </Content>
     </>
   )
