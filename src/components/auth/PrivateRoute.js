@@ -1,11 +1,25 @@
 import React from 'react'
-import { Redirect, Route } from 'react-router-dom'
-import { isAuthenticate } from '.'
+import { Route,Redirect } from 'react-router-dom'
+import { isAuthenticated } from '.';
 
 const PrivateRoute = ({ children }) => {
-    return <Route render={() => {
-        return isAuthenticate() ? children : <Redirect to={{ pathname: '/' }} />
-    }} />
+    const { data } = isAuthenticated();
+    return (
+        <Route
+            render={() =>
+                isAuthenticated() && data.role_id == 2 ?
+                    children
+                    : (
+
+                        < Redirect
+                            to={{
+                                pathname: "/"
+                            }}
+                        />
+                    )
+            }
+        />
+    );
 }
 
 export default PrivateRoute
