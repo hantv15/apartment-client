@@ -1,48 +1,40 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { authenticate, isAuthenticated, signIn } from "../../auth";
 import { Redirect } from "react-router-dom";
-import { authenticate, isAuthenticate, signIn } from "../../auth";
-
 const SignIn = () => {
-  const [success, setSuccess] = useState();
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  const { data } = isAuthenticated();
+  const { register, handleSubmit } = useForm();
+  const [success, setSuccess] = useState(false);
 
-  const { role_id } = isAuthenticate();
-
-  const onSubmit = async (user) => {
+  const onSubmit = async (param) => {
     try {
-      const { data } = await signIn(user);
+      const { data } = await signIn(param);
       authenticate(data);
       setSuccess(true);
     } catch (error) {
-      console.log(error.message);
+      localStorage.removeItem("client");
+      console.log(error.response.data);
     }
   };
 
-  const redirecUser = () => {
-    if (success) {
-      if (role_id == 2) {
-        console.log("client: ", role_id);
-        return <Redirect to="/client" />;
+  const redirectUser = (data) => {
+    if (data != undefined) {
+      if (data.role_id == 2) {
+        return <Redirect to="/dashboard" />;
       } else {
-        localStorage.removeItem("user");
+        localStorage.removeItem("client");
         return <Redirect to="/" />;
       }
+    } else {
+      localStorage.removeItem("client");
+      return <Redirect to="/" />;
     }
   };
 
-  redirecUser();
-
-  if (isAuthenticate()) {
-    return <Redirect to="/client" />;
-  }
-
   return (
-    <>
+    <div className="login-page">
+      {redirectUser(data)}
       <div className="login-box">
         <div className="login-logo">
           <a href="../../index2.html">
@@ -56,6 +48,7 @@ const SignIn = () => {
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="input-group mb-3">
                 <input
+                  type="text"
                   className="form-control"
                   placeholder="Email"
                   {...register("username")}
@@ -92,6 +85,7 @@ const SignIn = () => {
                 {/* /.col */}
               </div>
             </form>
+            {/* /.social-auth-links */}
             <p className="mb-1">
               <a href="forgot-password.html">I forgot my password</a>
             </p>
@@ -99,7 +93,7 @@ const SignIn = () => {
           {/* /.login-card-body */}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

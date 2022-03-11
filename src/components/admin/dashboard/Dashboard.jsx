@@ -1,11 +1,11 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { isAuthenticate } from "../../auth";
+import { isAuthenticated } from "../../auth";
 import Content from "../../core/Content";
 
 const Dashboard = () => {
   const [file, setFile] = useState({});
-  const { data } = isAuthenticate();
+  const { data } = isAuthenticated();
   console.log("token: ", data.token);
   const handleChange = (e) => {
     setFile(e.target.files[0]);
