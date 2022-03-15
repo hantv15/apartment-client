@@ -7,11 +7,9 @@ import { isAuthenticated } from "../../auth";
 
 const BillDetail = () => {
 
-
   const [billDetailUser, setBillDetailUser] = useState([]);
   const { id } = useParams();
 
-  console.log(isAuthenticated())
   console.log(id);
 
   useEffect(() => {
@@ -25,7 +23,7 @@ const BillDetail = () => {
       }
     };
     getBillDetailUser();
-  }, [id]);
+  }, []);
 
   return (
     <>

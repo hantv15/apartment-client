@@ -1,10 +1,9 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useParams } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import { isAuthenticated, logOut } from "../../auth";
 import { Link } from "react-router-dom";
 const Sidebar = () => {
-
   const history = useHistory();
   const { data } = isAuthenticated();
   const logout = async () => {
