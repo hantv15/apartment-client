@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { get } from "../../common/departmentAPI";
-import Content from "../../core/Content";
-import { Apartment } from "./Apartment";
+import { get } from "../api/Apartment";
+import Content from "../core/Content";
+import { DepartmentDetail } from "./detailDepartment/Department";
 
 const ApartmentDetail = () => {
   const { id } = useParams();
-  const [apartment, setApartment] = useState({});
+  const [department, setDepartment] = useState({});
   const [showBasic, setShowBasic] = useState(true);
+
   const statusOptions = [
     {
       value: 1,
@@ -23,7 +24,8 @@ const ApartmentDetail = () => {
     const getDepartment = async () => {
       try {
         const { data } = await get(id);
-        setApartment(data);
+        console.log(data,data[0])
+        setDepartment(data.data[0]);
       } catch (error) {
         console.log(error);
       }
@@ -31,6 +33,7 @@ const ApartmentDetail = () => {
 
     getDepartment();
   }, []);
+  
 
   const addDepartment = () => {
     return (
@@ -80,8 +83,8 @@ const ApartmentDetail = () => {
             {/* /.card-header */}
             <div className="card-body">
               {showBasic && (
-                <Apartment
-                  department={apartment}
+                <DepartmentDetail
+                  department={department}
                   statusOptions={statusOptions}
                 />
               )}

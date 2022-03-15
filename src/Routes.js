@@ -3,9 +3,10 @@ import React from 'react'
 import SignIn from "./components/pages/signin/SignIn";
 import PrivateRoute from "./components/auth/PrivateRoute";
 import Dashboard from "./components/admin/dashboard/Dashboard";
-import { Apartment } from "./components/admin/apartment/Apartment";
+import ApartmentDetail from "./components/admin/DepartmentDetail";
 import Profile from "./components/admin/profile/Profile";
-import { UserContext } from "./components/context/Context";
+import BillDetail from './components/admin/bill/BillModel'
+import Service from "./components/admin/service/Service";
 
 const Routes = () => {
     return (
@@ -17,7 +18,6 @@ const Routes = () => {
 
                 <Switch>
                     <PrivateRoute >
-                        <UserContext.Provider>
                             <Route exact path="/dashboard">
                                 <Dashboard />
                             </Route>
@@ -25,9 +25,14 @@ const Routes = () => {
                                 <Profile />
                             </Route>
                             <Route exact path="/apartment">
-                                <Apartment />
+                                <ApartmentDetail />
                             </Route>
-                        </UserContext.Provider>
+                            <Route exact path="/bill/:id">
+                                <BillDetail />
+                            </Route>
+                            <Route exact path="/service">
+                                <Service />
+                            </Route>
 
                     </PrivateRoute>
                 </Switch>

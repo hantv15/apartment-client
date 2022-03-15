@@ -47,10 +47,13 @@ const Sidebar = () => {
                 <Link to="/apartment" className="waves-effect waves-dark" aria-expanded="false"><i className="fa fa-table" /><span className="hide-menu" />Căn Hộ</Link>
               </li>
               <li>
-                <a className="waves-effect waves-dark" aria-expanded="false"><i className="fa fa-smile-o" /><span className="hide-menu" />Icon</a>
+                <Link to="/bill/:id" className="waves-effect waves-dark" aria-expanded="false"><i className="fa fa-smile-o" /><span className="hide-menu" />Hóa đơn</Link>
               </li>
               <li>
-                <a className="waves-effect waves-dark" aria-expanded="false"><i className="fa fa-globe" /><span className="hide-menu" />Map</a></li>
+                <Link to="/service" className="waves-effect waves-dark" aria-expanded="false"><i className="fa fa-smile-o" /><span className="hide-menu" />Dich vu</Link>
+              </li>
+              <li>
+                <a className="waves-effect waves-dark" aria-expanded="false"><i className="fa fa-globe" /><span className="hide-menu" />Thông báo</a></li>
               <li>
                 <a className="waves-effect waves-dark" aria-expanded="false"><i className="fa fa-bookmark-o" /><span className="hide-menu" />Blank</a>
               </li>
@@ -62,10 +65,10 @@ const Sidebar = () => {
                   onClick={() => logout()}
                 >
                   <i className="nav-icon fas fa-arrow-right-from-bracket" />
-                  <p>
+                  <button>
                     Đăng xuất
                     {/* <span className="right badge badge-danger">New</span> */}
-                  </p>
+                  </button>
                 </a>
               </li>
 
