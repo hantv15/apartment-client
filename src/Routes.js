@@ -19,21 +19,21 @@ const Routes = () => {
 
                 <Switch>
                     <PrivateRoute >
-                            <Route exact path="/dashboard">
-                                <Dashboard />
-                            </Route>
-                            <Route exact path="/profile">
-                                <Profile />
-                            </Route>
-                            <Route exact path="/apartment/:id">
-                                <ApartmentDetail />
-                            </Route>
-                            <Route exact path="/bill/:id">
-                                <BillDetail />
-                            </Route>
-                            <Route exact path="/service/:id">
-                                <Service />
-                            </Route>
+                        <Route exact path="/dashboard">
+                            <Dashboard />
+                        </Route>
+                        <Route exact path="/profile">
+                            <Profile />
+                        </Route>
+                        <Route exact path="/apartment/:id">
+                            <ApartmentDetail />
+                        </Route>
+                        <Route exact path="/bill/:id">
+                            <BillDetail />
+                        </Route>
+                        <Route exact path="/service/:id">
+                            <Service />
+                        </Route>
 
                     </PrivateRoute>
                 </Switch>

@@ -4,8 +4,8 @@ export const get = (id) => {
     const url = `/apartment/${id}`;
     return instance.get(url);
 }
-export const getBillDetail = (id, param) => {
-    const url = `/apartment/${id}/finance?${id}/bill-detail`;
+export const getBillDetail = (id, bill_id) => {
+    const url = `/apartment/${id}/finance/${bill_id}/bill-detail`;
     return instance.get(url);
 }
 export const getService = (id, param) => {
@@ -15,5 +15,10 @@ export const getService = (id, param) => {
 
 export const NoGetPage = (param) => {
     const url = `/apartment?${param}`;
+    return instance.get(url);
+}
+
+export const getApartmentFinace = (id) => {
+    const url = `/apartment/29/finance`;
     return instance.get(url);
 }
