@@ -15,6 +15,7 @@ const BillDetail = () => {
       try {
         const res = await getApartmentFinace(id);
         const bill_id = res.data.data[0].id;
+        
         const { data } = await getBillDetail(id, bill_id);
         setBillDetailUser(data.data);
         console.log("getBillDetail: ", data.data);
@@ -90,5 +91,6 @@ const BillDetail = () => {
     </>
   );
 };
+
 
 export default BillDetail;
