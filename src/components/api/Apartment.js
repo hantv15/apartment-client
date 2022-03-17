@@ -20,3 +20,4 @@ export const NoGetPage = (param) => {
     const url = `/apartment?${param}`;
     return instance.get(url);
 }
+

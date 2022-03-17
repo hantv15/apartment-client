@@ -331,6 +331,7 @@ const Profile = () => {
                           />
                         </div>
                       </div>
+
                       <div className="form-group">
                         <label htmlFor="example-email" className="col-md-12">
                           Email
@@ -347,7 +348,7 @@ const Profile = () => {
                         </div>
                       </div>
                       <div className="form-group">
-                        <label className="col-md-12">Số điện thoại</label>
+                        <label className="col-md-12">Tòa nhà</label>
                         <div className="col-md-12">
                           <input
                             type="text"
