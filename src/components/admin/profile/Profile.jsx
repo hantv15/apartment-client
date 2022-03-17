@@ -361,9 +361,12 @@ const Profile = () => {
                   </div>
                 </div>
               </div>
-            </Content>
-          </>
-          );
+            </div>
+          </div>
+        </div>
+      </Content>
+    </>
+  );
 };
 
-          export default Profile;
+export default Profile;
