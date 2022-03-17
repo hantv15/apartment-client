@@ -104,10 +104,11 @@ const Profile = () => {
                               />
                             </div>
                           </div>
-                        </form>
+
                       </div>
                     </div>
                   </div>
+                  </form>
                   {/* Column */}
               </div>
             </Content>
@@ -115,4 +116,4 @@ const Profile = () => {
           );
 };
 
-export default Profile;
+          export default Profile;
