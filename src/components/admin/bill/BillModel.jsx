@@ -10,8 +10,6 @@ const BillDetail = () => {
   const [billDetailUser, setBillDetailUser] = useState([]);
   const { id } = useParams();
 
-  console.log(id);
-
   useEffect(() => {
     const getBillDetailUser = async () => {
       try {
@@ -20,7 +18,7 @@ const BillDetail = () => {
         console.log(data.data);
       } catch (error) {
         console.log(error);
-      }
+      } 
     };
     getBillDetailUser();
   }, []);
@@ -53,7 +51,7 @@ const BillDetail = () => {
                     <tr>
                       <th class="text-center">#</th>
                       <th>Tên hóa đơn</th>
-                      <th>Tên dịch vụ</th>
+                      <th>Tên chủ hộ</th>
                       <th>Đơn giá</th>
                       <th>Số lượng</th>
                       <th>Tổng giá</th>

@@ -1,11 +1,12 @@
 import axios from "axios";
-import React, { useEffect, useState, useParams } from "react";
-import { NavLink, useHistory } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import {  Link ,useHistory, useParams } from "react-router-dom";
 import { isAuthenticated, logOut } from "../../auth";
-import { Link } from "react-router-dom";
+
 const Sidebar = () => {
   const history = useHistory();
   const { data } = isAuthenticated();
+
   const logout = async () => {
     let headersList = {
       "Accept": "*/*",
@@ -43,13 +44,13 @@ const Sidebar = () => {
                 <Link to="/profile" className="waves-effect waves-dark" aria-expanded="false"><i className="fa fa-user-circle-o" /><span className="hide-menu">Profile</span></Link>
               </li>
               <li>
-                <Link to="/apartment" className="waves-effect waves-dark" aria-expanded="false"><i className="fa fa-table" /><span className="hide-menu" />Căn Hộ</Link>
+                <Link to={`/apartment/${data.apartment_id}`} className="waves-effect waves-dark" aria-expanded="false"><i className="fa fa-table" /><span className="hide-menu" />Căn Hộ</Link>
               </li>
               <li>
-                <Link to="/bill/:id" className="waves-effect waves-dark" aria-expanded="false"><i className="fa fa-smile-o" /><span className="hide-menu" />Hóa đơn</Link>
+                <Link to={`/bill/${data.apartment_id}`} className="waves-effect waves-dark" aria-expanded="false"><i className="fa fa-smile-o" /><span className="hide-menu" />Hóa đơn</Link>
               </li>
               <li>
-                <Link to="/service" className="waves-effect waves-dark" aria-expanded="false"><i className="fa fa-smile-o" /><span className="hide-menu" />Dich vu</Link>
+                <Link to={`/service/${data.apartment_id}`}className="waves-effect waves-dark" aria-expanded="false"><i className="fa fa-smile-o" /><span className="hide-menu" />Dich vu</Link>
               </li>
               <li>
                 <a className="waves-effect waves-dark" aria-expanded="false"><i className="fa fa-globe" /><span className="hide-menu" />Thông báo</a></li>

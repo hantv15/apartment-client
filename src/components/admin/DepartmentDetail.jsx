@@ -24,8 +24,8 @@ const ApartmentDetail = () => {
     const getDepartment = async () => {
       try {
         const { data } = await get(id);
-        console.log(data,data[0])
         setDepartment(data.data[0]);
+      console.log(data.data[0]);
       } catch (error) {
         console.log(error);
       }

@@ -1,15 +1,15 @@
 import instance from "./instance";
 
-export const get = (param) => {
-    const url = `/apartment?${param}`;
+export const get = (id) => {
+    const url = `/apartment/${id}`;
     return instance.get(url);
 }
 export const getBillDetail = (id, param) => {
-    const url = `/apartment?${param}/finance/${id}/bill-detail`;
+    const url = `/apartment/${id}/finance?${id}/bill-detail`;
     return instance.get(url);
 }
 export const getService = (id, param) => {
-    const url = `/apartment?${param}/${id}/service`;
+    const url = `/service/${id}`;
     return instance.get(url);
 }
 

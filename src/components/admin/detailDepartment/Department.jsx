@@ -1,6 +1,6 @@
 import React from "react";
 
-export const DepartmentDetail = ({ department, statusOptions }) => {
+export const DepartmentDetail = ({ department }) => {
 
   return (
     <>
@@ -58,17 +58,18 @@ export const DepartmentDetail = ({ department, statusOptions }) => {
                         <input type="text" className="form-control form-control-line" value={department.apartment_id} />
                       </div>
                     </div>
-                    {/* <div className="form-group">
-                      <label htmlFor="example-email" className="col-md-12"> Số điện thoại</label>
-                      <div className="col-md-12">
-                        <input type="email" className="form-control form-control-line" value={department.phone_number} />
-                      </div>
-                    </div> */}
+              
 
                     <div className="form-group">
                       <label className="col-md-12"> Tòa nhà</label>
                       <div className="col-md-12">
                         <input type="text" className="form-control form-control-line" value="VP 4" />
+                      </div>
+                    </div>
+                    <div className="form-group">
+                      <label className="col-md-12"> Số điện thoại</label>
+                      <div className="col-md-12">
+                        <input type="text" className="form-control form-control-line" value={department.phone_number} />
                       </div>
                     </div>
                     <div className="form-group">
