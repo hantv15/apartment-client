@@ -1,7 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { isAuthenticated, logOut } from "../../auth";
+import { useHistory } from "react-router-dom";
 
 const Sidebar = () => {
+  const apartment_id = isAuthenticated().data.apartment_id;
+  const history = useHistory();
   return (
     <>
       <aside className="left-sidebar">
@@ -49,20 +53,20 @@ const Sidebar = () => {
                   aria-expanded="false"
                 >
                   <i className="fa fa-user-circle-o" />
-                  <span className="hide-menu">Thông tin</span>
+                  <span className="hide-menu">Thông tin người dùng</span>
                 </Link>
               </li>
               <li>
                 {" "}
-                <a
+                <Link
                   className="waves-effect waves-dark"
-                  href="table-basic.html"
+                  to={`/apartment/${apartment_id}`}
                   aria-expanded="false"
                 >
                   <i className="fa fa-table" />
                   <span className="hide-menu" />
-                  Tables
-                </a>
+                  Căn hộ
+                </Link>
               </li>
               <li>
                 {" "}
@@ -114,11 +118,14 @@ const Sidebar = () => {
               </li>
               <div className="text-center m-t-30">
                 <a
-                  href="https://wrappixel.com/templates/elegant-admin/"
+                  onClick={() => {
+                    logOut();
+                    history.push("/");
+                  }}
                   className="btn waves-effect waves-light btn-success hidden-md-down"
                 >
                   {" "}
-                  Upgrade to Pro
+                  Đăng xuất
                 </a>
               </div>
             </ul>
