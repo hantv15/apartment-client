@@ -3,11 +3,13 @@ import React from 'react'
 import SignIn from "./components/pages/signin/SignIn";
 import PrivateRoute from "./components/auth/PrivateRoute";
 import Dashboard from "./components/admin/dashboard/Dashboard";
-import Apartment from "./components/admin/apartment/Apartment";
 import Profile from "./components/admin/profile/Profile";
-import { UserContext } from "./components/context/Context";
+import BillDetail from './components/admin/bill/BillModel'
+import Service from "./components/admin/service/Service";
+import Apartment from "./components/admin/apartment/Apartment";
 
 const Routes = () => {
+
     return (
         <BrowserRouter>
             <Switch>
@@ -17,17 +19,21 @@ const Routes = () => {
 
                 <Switch>
                     <PrivateRoute >
-                        <UserContext.Provider>
-                            <Route exact path="/dashboard">
-                                <Dashboard />
-                            </Route>
-                            <Route exact path="/profile">
-                                <Profile />
-                            </Route>
-                            <Route exact path="/apartment">
-                                <Apartment />
-                            </Route>
-                        </UserContext.Provider>
+                        <Route exact path="/dashboard">
+                            <Dashboard />
+                        </Route>
+                        <Route exact path="/profile">
+                            <Profile />
+                        </Route>
+                        <Route exact path="/apartment/:id">
+                            <Apartment />
+                        </Route>
+                        <Route exact path="/bill/:id">
+                            <BillDetail />
+                        </Route>
+                        <Route exact path="/service/:id">
+                            <Service />
+                        </Route>
 
                     </PrivateRoute>
                 </Switch>

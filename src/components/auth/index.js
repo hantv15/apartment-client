@@ -20,8 +20,9 @@ export const isAuthenticated = () => {
         return false;
     }
 };
+
 export const logOut = (next) => {
     if (typeof window !== 'undefined') {
-        localStorage.removeItem('user')
+        localStorage.removeItem('client');
     }
 }
