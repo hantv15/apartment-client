@@ -1,55 +1,42 @@
-import Content from "../../core/Content";
+import React, { useEffect, useState } from "react";
+import { get } from "../../api/Apartment";
 import { isAuthenticated } from "../../auth";
-import moment from "moment";
-import { useEffect, useState } from "react";
-import { get } from "../../api/UserApi";
-const Profile = () => {
-  const [user, setUser] = useState({});
+import Content from "../../core/Content";
+
+const Apartment = () => {
+  const [apartment, setApartment] = useState({});
   const { data } = isAuthenticated();
-  const idUser = data.id;
-  console.log(data);
-  const dateString = moment(data.dob).format("DD/MM/YYYY");
-  console.log();
+  const idApartment = data.apartment_id;
   useEffect(() => {
     try {
-      const getUser = async () => {
-        const { data } = await get(idUser);
-        setUser(data.data[0]);
+      const getApartment = async () => {
+        const { data } = await get(idApartment);
+        setApartment(data.data[0]);
       };
-      getUser();
+      getApartment();
     } catch (error) {
       console.log(error.message);
     }
   }, [0]);
+  console.log(apartment);
   return (
     <>
-      <Content title="Thông tin người dùng">
+      <Content title="Thông tin căn hộ">
         <div className="row">
           {/* Column */}
           <div className="col-lg-4 col-xlg-3 col-md-5">
             <div className="card">
               <div className="card-body">
-                <center className="m-t-30">
-                  {" "}
-                  <img
-                    src="../assets/images/users/5.jpg"
-                    className="img-circle"
-                    width={150}
-                  />
-                  <h4 className="card-title m-t-10">{user.user_name}</h4>
-                  <h6 className="card-subtitle">Cư dân</h6>
-                </center>
-              </div>
-              <div>
-                <hr />{" "}
-              </div>
-              <div className="card-body">
                 {" "}
-                <small className="text-muted">Địa chỉ email </small>
-                <h6>{user.email}</h6>{" "}
-                <small className="text-muted p-t-30 db">Điện thoại</small>
-                <h6>{user.phone_number}</h6>{" "}
-                <small className="text-muted p-t-30 db">Địa chỉ</small>
+                <small className="text-muted">Chủ sở hữu</small>
+                <h6>{apartment.name}</h6>{" "}
+                <small className="text-muted">Mã căn hộ</small>
+                <h6>{apartment.apartment_id}</h6>{" "}
+                <small className="text-muted">Diện dích căn hộ</small>
+                <h6>{apartment.square_meters} m2</h6>{" "}
+                <small className="text-muted p-t-30 db">Toà nhà</small>
+                <h6>{apartment.building_name}</h6>{" "}
+                <small className="text-muted p-t-30 db">Address</small>
                 <h6>
                   Tòa nhà FPT Polytechnic, P. Trịnh Văn Bô, Xuân Phương, Nam Từ
                   Liêm, Hà Nội, Vietnam
@@ -64,6 +51,7 @@ const Profile = () => {
                     allowFullScreen
                   />
                 </div>{" "}
+                <small className="text-muted p-t-30 db">Social Profile</small>
               </div>
             </div>
           </div>
@@ -78,28 +66,45 @@ const Profile = () => {
                   <a
                     className="nav-link active"
                     data-toggle="tab"
+                    href="#home"
+                    role="tab"
+                  >
+                    Dịch vụ căn hộ đang sử dụng
+                  </a>{" "}
+                </li>
+                <li className="nav-item">
+                  {" "}
+                  <a
+                    className="nav-link"
+                    data-toggle="tab"
+                    href="#profile"
+                    role="tab"
+                  >
+                    Profile
+                  </a>{" "}
+                </li>
+                <li className="nav-item">
+                  {" "}
+                  <a
+                    className="nav-link"
+                    data-toggle="tab"
                     href="#settings"
                     role="tab"
-                    aria-selected="true"
                   >
-                    Thông tin
+                    Settings
                   </a>{" "}
                 </li>
               </ul>
               {/* Tab panes */}
               <div className="tab-content">
-                <div className="tab-pane" id="home" role="tabpanel">
+                <div className="tab-pane active" id="settings" role="tabpanel">
                   <div className="card-body">
                     <div className="profiletimeline">
                       <div className="sl-item">
                         <div className="sl-left">
                           {" "}
                           <img
-                            src={
-                              user.avatar !== null
-                                ? user.avatar
-                                : `${process.env.PUBLIC_URL}/assets/images/users/1.jpg`
-                            }
+                            src="../assets/images/users/1.jpg"
                             alt="user"
                             className="img-circle"
                           />{" "}
@@ -158,7 +163,107 @@ const Profile = () => {
                           </div>
                         </div>
                       </div>
-
+                      <hr />
+                      <div className="sl-item">
+                        <div className="sl-left">
+                          {" "}
+                          <img
+                            src="../assets/images/users/2.jpg"
+                            alt="user"
+                            className="img-circle"
+                          />{" "}
+                        </div>
+                        <div className="sl-right">
+                          <div>
+                            {" "}
+                            <a href="javascript:void(0)" className="link">
+                              John Doe
+                            </a>{" "}
+                            <span className="sl-date">5 minutes ago</span>
+                            <div className="m-t-20 row">
+                              <div className="col-md-3 col-xs-12">
+                                <img
+                                  src="../assets/images/big/img1.jpg"
+                                  alt="user"
+                                  className="img-responsive radius"
+                                />
+                              </div>
+                              <div className="col-md-9 col-xs-12">
+                                <p>
+                                  {" "}
+                                  Lorem ipsum dolor sit amet, consectetur
+                                  adipiscing elit. Integer nec odio. Praesent
+                                  libero. Sed cursus ante dapibus diam.{" "}
+                                </p>{" "}
+                                <a
+                                  href="javascript:void(0)"
+                                  className="btn btn-success"
+                                >
+                                  {" "}
+                                  Design weblayout
+                                </a>
+                              </div>
+                            </div>
+                            <div className="like-comm m-t-20">
+                              {" "}
+                              <a
+                                href="javascript:void(0)"
+                                className="link m-r-10"
+                              >
+                                2 comment
+                              </a>{" "}
+                              <a
+                                href="javascript:void(0)"
+                                className="link m-r-10"
+                              >
+                                <i className="fa fa-heart text-danger" /> 5 Love
+                              </a>{" "}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <hr />
+                      <div className="sl-item">
+                        <div className="sl-left">
+                          {" "}
+                          <img
+                            src="../assets/images/users/3.jpg"
+                            alt="user"
+                            className="img-circle"
+                          />{" "}
+                        </div>
+                        <div className="sl-right">
+                          <div>
+                            <a href="javascript:void(0)" className="link">
+                              John Doe
+                            </a>{" "}
+                            <span className="sl-date">5 minutes ago</span>
+                            <p className="m-t-10">
+                              {" "}
+                              Lorem ipsum dolor sit amet, consectetur adipiscing
+                              elit. Integer nec odio. Praesent libero. Sed
+                              cursus ante dapibus diam. Sed nisi. Nulla quis sem
+                              at nibh elementum imperdiet. Duis sagittis ipsum.
+                              Praesent mauris. Fusce nec tellus sed augue semper{" "}
+                            </p>
+                          </div>
+                          <div className="like-comm m-t-20">
+                            {" "}
+                            <a
+                              href="javascript:void(0)"
+                              className="link m-r-10"
+                            >
+                              2 comment
+                            </a>{" "}
+                            <a
+                              href="javascript:void(0)"
+                              className="link m-r-10"
+                            >
+                              <i className="fa fa-heart text-danger" /> 5 Love
+                            </a>{" "}
+                          </div>
+                        </div>
+                      </div>
                       <hr />
                       <div className="sl-item">
                         <div className="sl-left">
@@ -305,64 +410,93 @@ const Profile = () => {
                     </div>
                   </div>
                 </div>
-                <div className="tab-pane active" id="settings" role="tabpanel">
+                <div className="tab-pane" id="home" role="tabpanel">
                   <div className="card-body">
-                    <form className="form-horizontal form-material">
-                      <div className="form-group">
-                        <label className="col-md-12">Họ và tên</label>
-                        <div className="col-md-12">
-                          <input
-                            type="text"
-                            disabled
-                            placeholder={user.user_name}
-                            className="form-control form-control-line"
-                          />
-                        </div>
-                      </div>
-                      <div className="form-group">
-                        <label className="col-md-12">Ngày sinh</label>
-                        <div className="col-md-12">
-                          <input
-                            type="text"
-                            disabled
-                            placeholder={dateString}
-                            className="form-control form-control-line"
-                          />
-                        </div>
-                      </div>
-                      <div className="form-group">
-                        <label htmlFor="example-email" className="col-md-12">
-                          Email
-                        </label>
-                        <div className="col-md-12">
-                          <input
-                            type="email"
-                            disabled
-                            placeholder={user.email}
-                            className="form-control form-control-line"
-                            name="example-email"
-                            id="example-email"
-                          />
-                        </div>
-                      </div>
-                      <div className="form-group">
-                        <label className="col-md-12">Số điện thoại</label>
-                        <div className="col-md-12">
-                          <input
-                            type="text"
-                            disabled
-                            placeholder={user.phone_number}
-                            className="form-control form-control-line"
-                          />
-                        </div>
-                      </div>
-                    </form>
+                    <div className="table-responsive">
+                      <table className="table">
+                        <thead>
+                          <tr>
+                            <th>#</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Username</th>
+                            <th>Role</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>1</td>
+                            <td>Deshmukh</td>
+                            <td>Prohaska</td>
+                            <td>@Genelia</td>
+                            <td>
+                              <span className="label label-danger">admin</span>{" "}
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>2</td>
+                            <td>Deshmukh</td>
+                            <td>Gaylord</td>
+                            <td>@Ritesh</td>
+                            <td>
+                              <span className="label label-info">member</span>{" "}
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>3</td>
+                            <td>Sanghani</td>
+                            <td>Gusikowski</td>
+                            <td>@Govinda</td>
+                            <td>
+                              <span className="label label-warning">
+                                developer
+                              </span>{" "}
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>4</td>
+                            <td>Roshan</td>
+                            <td>Rogahn</td>
+                            <td>@Hritik</td>
+                            <td>
+                              <span className="label label-success">
+                                supporter
+                              </span>{" "}
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>5</td>
+                            <td>Joshi</td>
+                            <td>Hickle</td>
+                            <td>@Maruti</td>
+                            <td>
+                              <span className="label label-info">member</span>{" "}
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>6</td>
+                            <td>Nigam</td>
+                            <td>Eichmann</td>
+                            <td>@Sonu</td>
+                            <td>
+                              <span className="label label-success">
+                                supporter
+                              </span>{" "}
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
                 </div>
               </div>
-            </Content>
-          </>
-          );
+            </div>
+          </div>
+          {/* Column */}
+        </div>
+      </Content>
+    </>
+  );
 };
 
-          export default Profile;
+export default Apartment;

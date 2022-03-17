@@ -23,6 +23,6 @@ export const isAuthenticated = () => {
 
 export const logOut = (next) => {
     if (typeof window !== 'undefined') {
-        localStorage.removeItem('user')
+        localStorage.removeItem('client');
     }
 }

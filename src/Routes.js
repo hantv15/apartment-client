@@ -3,10 +3,10 @@ import React from 'react'
 import SignIn from "./components/pages/signin/SignIn";
 import PrivateRoute from "./components/auth/PrivateRoute";
 import Dashboard from "./components/admin/dashboard/Dashboard";
-import ApartmentDetail from "./components/admin/DepartmentDetail";
 import Profile from "./components/admin/profile/Profile";
 import BillDetail from './components/admin/bill/BillModel'
 import Service from "./components/admin/service/Service";
+import Apartment from "./components/admin/apartment/Apartment";
 
 const Routes = () => {
 
@@ -26,7 +26,7 @@ const Routes = () => {
                             <Profile />
                         </Route>
                         <Route exact path="/apartment/:id">
-                            <ApartmentDetail />
+                            <Apartment />
                         </Route>
                         <Route exact path="/bill/:id">
                             <BillDetail />
