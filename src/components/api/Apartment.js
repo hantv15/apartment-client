@@ -5,14 +5,21 @@ export const get = (id) => {
     return instance.get(url);
 }
 export const getBillDetail = (id, bill_id) => {
+<<<<<<< Updated upstream
     const url = `/apartment/${id}/finance/${bill_id}/bill-detail`;
+=======
+    const url= `/apartment/${id}/finance/${bill_id}/bill-detail`;
+>>>>>>> Stashed changes
     return instance.get(url);
 }
-export const getService = (id, param) => {
+export const getService = (id) => {
     const url = `/service/${id}`;
     return instance.get(url);
 }
-
+export const getApartmentFinace = (id) => {
+    const url = `/apartment/${id}/finance`;
+    return instance.get(url);
+}
 export const NoGetPage = (param) => {
     const url = `/apartment?${param}`;
     return instance.get(url);
