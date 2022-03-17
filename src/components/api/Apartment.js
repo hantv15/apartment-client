@@ -1,26 +1,6 @@
 import instance from "./instance";
 
-<<<<<<< Updated upstream
 export const get = (param) => {
-=======
-export const get = (id) => {
-    const url = `/apartment/${id}`;
-    return instance.get(url);
-}
-export const getBillDetail = (id, bill_id) => {
-    const url= `/apartment/${id}/finance/${bill_id}/bill-detail`;
-    return instance.get(url);
-}
-export const getService = (id) => {
-    const url = `/service/${id}`;
-    return instance.get(url);
-}
-export const getApartmentFinace = (id) => {
-    const url = `/apartment/${id}/finance`;
-    return instance.get(url);
-}
-export const NoGetPage = (param) => {
->>>>>>> Stashed changes
     const url = `/apartment?${param}`;
     return instance.get(url);
 }
