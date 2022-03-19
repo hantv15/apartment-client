@@ -3,6 +3,7 @@ import { isAuthenticated } from "../../auth";
 import moment from "moment";
 import { useEffect, useState } from "react";
 import { get } from "../../api/UserApi";
+
 const Profile = () => {
   const [user, setUser] = useState({});
   const { data } = isAuthenticated();
