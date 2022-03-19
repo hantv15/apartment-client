@@ -16,6 +16,18 @@ export const getApartmentFinace = (id) => {
     const url = `/apartment/${id}/finance`;
     return instance.get(url);
 }
+export const getBillPaid = (id) => {
+    const url = `/apartment/${id}/finance/paid`;
+    return instance.get(url);
+}
+export const getBillUnpaid = (id) => {
+    const url = `/apartment/${id}/finance/unpaid`;
+    return instance.get(url);
+}
+
+
+
+
 export const NoGetPage = (param) => {
     const url = `/apartment?${param}`;
     return instance.get(url);
