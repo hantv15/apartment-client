@@ -1,12 +1,30 @@
 import React, { useEffect, useState } from "react";
-import { get } from "../../api/Apartment";
+import { get, getService } from "../../api/Apartment";
 import { isAuthenticated } from "../../auth";
 import Content from "../../core/Content";
 
 const Apartment = () => {
   const [apartment, setApartment] = useState({});
+  const [services, setServices] = useState({});
   const { data } = isAuthenticated();
   const idApartment = data.apartment_id;
+
+
+
+  useEffect(() => {
+    const getServices = async () => {
+      try {
+        const { data } = await getService(idApartment);
+        setServices(data.data);
+        console.log(data.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getServices();
+  }, []);
+
+  // căn hộ
   useEffect(() => {
     try {
       const getApartment = async () => {
@@ -19,6 +37,10 @@ const Apartment = () => {
     }
   }, [0]);
   console.log(apartment);
+  // service
+
+
+
   return (
     <>
       <Content title="Thông tin căn hộ">
@@ -415,75 +437,24 @@ const Apartment = () => {
                     <div className="table-responsive">
                       <table className="table">
                         <thead>
+                       
                           <tr>
-                            <th>#</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Username</th>
-                            <th>Role</th>
+                            <th>STT</th>
+                            <th>Tên dịch vụ</th>
+                            <th>Gía</th>
+                            <th>Số lượng</th>
                           </tr>
                         </thead>
                         <tbody>
+                        {" "}
                           <tr>
-                            <td>1</td>
-                            <td>Deshmukh</td>
-                            <td>Prohaska</td>
-                            <td>@Genelia</td>
-                            <td>
-                              <span className="label label-danger">admin</span>{" "}
-                            </td>
+                            <td>{services.id}</td>
+                            <td>{services.name}</td>
+                            <td>{services.price}</td>
+                            <td>{services.description}</td>
+                           
                           </tr>
-                          <tr>
-                            <td>2</td>
-                            <td>Deshmukh</td>
-                            <td>Gaylord</td>
-                            <td>@Ritesh</td>
-                            <td>
-                              <span className="label label-info">member</span>{" "}
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>3</td>
-                            <td>Sanghani</td>
-                            <td>Gusikowski</td>
-                            <td>@Govinda</td>
-                            <td>
-                              <span className="label label-warning">
-                                developer
-                              </span>{" "}
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>4</td>
-                            <td>Roshan</td>
-                            <td>Rogahn</td>
-                            <td>@Hritik</td>
-                            <td>
-                              <span className="label label-success">
-                                supporter
-                              </span>{" "}
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>5</td>
-                            <td>Joshi</td>
-                            <td>Hickle</td>
-                            <td>@Maruti</td>
-                            <td>
-                              <span className="label label-info">member</span>{" "}
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>6</td>
-                            <td>Nigam</td>
-                            <td>Eichmann</td>
-                            <td>@Sonu</td>
-                            <td>
-                              <span className="label label-success">
-                                supporter
-                              </span>{" "}
-                            </td>
-                          </tr>
+                       {" "}
                         </tbody>
                       </table>
                     </div>
@@ -494,6 +465,7 @@ const Apartment = () => {
           </div>
           {/* Column */}
         </div>
+        {/* Column */}
       </Content>
     </>
   );

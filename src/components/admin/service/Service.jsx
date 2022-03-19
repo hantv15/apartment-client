@@ -4,26 +4,26 @@ import Content from '../../core/Content'
 import { getService } from '../../api/Apartment'
 
 const Service = () => {
-    const [services, setServices] = useState([]);
-    const { id } = useParams();
-    console.log(id);
+  const [services, setServices] = useState([]);
+  const { id } = useParams();
+  console.log(id);
 
-    useEffect(() => {
-        const getServices = async () => {
-            try {
-                const { data } = await getService(id);
-                setServices(data.data[0]);
-                console.log(data.data);
-            } catch (error) {
-                console.log(error);
-            }
-        };
-        getServices();
-    }, []);
+  useEffect(() => {
+    const getServices = async () => {
+      try {
+        const { data } = await getService(id);
+        setServices(data.data[0]);
+        console.log(data.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getServices();
+  }, []);
 
-    return (
-        <>
-             <Content>
+  return (
+    <>
+      <Content>
         <div class="row">
           <div class="col-12">
             <div class="card">
@@ -62,7 +62,7 @@ const Service = () => {
                         <td class="txt-oflo">{item.name}</td>
                         <td class="txt-oflo">{item.price}</td>
                         <td><span class="text-success">{item.description}</span></td>
-                 
+
                       </tr>
 
                     ))}
@@ -74,8 +74,8 @@ const Service = () => {
         </div>
 
       </Content>
-        </>
-    )
+    </>
+  )
 }
 
 export default Service
