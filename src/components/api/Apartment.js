@@ -12,6 +12,10 @@ export const getService = (id) => {
     const url = `/service/${id}`;
     return instance.get(url);
 }
+export const getCardBike = (id) => {
+    const url = `/apartment/${id}/card`;
+    return instance.get(url);
+}
 export const getApartmentFinace = (id) => {
     const url = `/apartment/${id}/finance`;
     return instance.get(url);
@@ -24,7 +28,6 @@ export const getBillUnpaid = (id) => {
     const url = `/apartment/${id}/finance/unpaid`;
     return instance.get(url);
 }
-
 
 
 

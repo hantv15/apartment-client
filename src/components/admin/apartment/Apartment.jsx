@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { get, getService, getApartmentFinace, getBillUnpaid, getBillPaid } from "../../api/Apartment";
+import { get, getService, getApartmentFinace, getBillUnpaid, getBillPaid, getCardBike } from "../../api/Apartment";
 import { isAuthenticated } from "../../auth";
 import Content from "../../core/Content";
 
@@ -10,6 +10,7 @@ const Apartment = () => {
   const [finances, setFinances] = useState({});
   const [billPaids, setBillPaids] = useState({});
   const [billUnpaids, setBillUnpaid] = useState({});
+  const [cardBikes, setCardBikes] = useState({});
   const { data } = isAuthenticated();
   const idApartment = data.apartment_id;
 
@@ -25,7 +26,7 @@ const Apartment = () => {
       }
     };
     getServices();
-  }, []);
+  }, [idApartment]);
 
   // căn hộ
   useEffect(() => {
@@ -38,17 +39,16 @@ const Apartment = () => {
     } catch (error) {
       console.log(error.message);
     }
-  }, [0]);
+  }, [idApartment]);
 
 
-  //bill
+  //billcardBikes
 
   useEffect(() => {
     try {
       const getFinances = async () => {
         const { data } = await getApartmentFinace(idApartment);
         setFinances(data.data[0]);
-        console.log(data.data[0]);
       };
       getFinances();
     } catch (error) {
@@ -62,7 +62,6 @@ const Apartment = () => {
       const getBillPaids = async () => {
         const { data } = await getBillPaid(idApartment);
         setBillPaids(data.data);
-        console.log(data.data);
       };
       getBillPaids();
     } catch (error) {
@@ -76,13 +75,27 @@ const Apartment = () => {
       const getBillUnpaids = async () => {
         const { data } = await getBillUnpaid(idApartment);
         setBillUnpaid(data.data[0]);
-        console.log(data.data[0]);
       };
       getBillUnpaids();
     } catch (error) {
       console.log(error.message);
     }
-  }, []);
+  }, [idApartment]);
+  // card bike
+
+
+  useEffect(() => {
+    try {
+      const getCardBikes = async () => {
+        const { data } = await getCardBike(idApartment);
+        setCardBikes(data.data[0]);
+        console.log(data.data[0]);
+      };
+      getCardBikes();
+    } catch (error) {
+      console.log(error.message);
+    }
+  }, [idApartment]);
 
 
   return (
@@ -157,7 +170,18 @@ const Apartment = () => {
                     href="#settings"
                     role="tab"
                   >
-                    Settings
+                    Trạng thái hóa đơn
+                  </a>{" "}
+                </li>
+                <li className="nav-item">
+                  {" "}
+                  <a
+                    className="nav-link"
+                    data-toggle="tab"
+                    href="#car"
+                    role="tab"
+                  >
+                    Thẻ xe
                   </a>{" "}
                 </li>
               </ul>
@@ -189,7 +213,7 @@ const Apartment = () => {
                             <td>{billPaids.apartment_id}</td>
                             <td>{billPaids.amount}</td>
                             <td>{billPaids.so_luong_hdct}</td>
-                           
+
                           </tr>
                           {" "}
                         </tbody>
@@ -220,7 +244,7 @@ const Apartment = () => {
                             <td>{billUnpaids.apartment_id}</td>
                             <td>{billUnpaids.amount}</td>
                             <td>{billUnpaids.so_luong_hdct}</td>
-                           
+
                           </tr>
                           {" "}
                         </tbody>
@@ -248,7 +272,7 @@ const Apartment = () => {
                         </thead>
                         <tbody>
                           {" "}
-                          <tr>
+                          <tr >
                             <td>{finances.id}</td>
                             <td>{finances.ten_hoa_don}</td>
                             <td>{finances.ten_chu_ho}</td>
@@ -259,22 +283,20 @@ const Apartment = () => {
                               <Link to={`/bill/${idApartment}`} class="btn btn-rounded btn-outline-success">Chi tiết</Link>
                             </td>
                           </tr>
+
                           {" "}
                         </tbody>
                       </table>
                     </div>
                   </div>
-
-
-
-
                 </div>
+
+                {/* dịch vụ */}
                 <div className="tab-pane" id="home" role="tabpanel">
                   <div className="card-body">
                     <div className="table-responsive">
                       <table className="table">
                         <thead>
-
                           <tr>
                             <th>STT</th>
                             <th>Tên dịch vụ</th>
@@ -289,7 +311,33 @@ const Apartment = () => {
                             <td>{services.name}</td>
                             <td>{services.price}</td>
                             <td>{services.description}</td>
-
+                          </tr>
+                          {" "}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+                {/* thẻ xe */}
+                <div className="tab-pane" id="car" role="tabpanel">
+                  <div className="card-body">
+                    <div className="table-responsive">
+                      <table className="table">
+                        <thead>
+                          <tr>
+                            <th>STT</th>
+                            <th>Tên thẻ</th>
+                            <th>Số</th>
+                            <th>Số lượng</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {" "}
+                          <tr>
+                            <td>{cardBikes.id}</td>
+                            <td>{cardBikes.name}</td>
+                            <td>{cardBikes.number}</td>
+                            <td>{services.so_luong_phuong_tien}</td>
                           </tr>
                           {" "}
                         </tbody>
