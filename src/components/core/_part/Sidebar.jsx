@@ -70,15 +70,15 @@ const Sidebar = () => {
               </li>
               <li>
                 {" "}
-                <a
+                <Link
                   className="waves-effect waves-dark"
-                  href="icon-fontawesome.html"
+                  to={`/complain`}
                   aria-expanded="false"
                 >
-                  <i className="fa fa-smile-o" />
+                  <i className="fa fa-table" />
                   <span className="hide-menu" />
-                  Icon
-                </a>
+                  Phan hoi
+                </Link>
               </li>
               <li>
                 {" "}
