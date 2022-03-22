@@ -7,6 +7,7 @@ import Profile from "./components/admin/profile/Profile";
 import BillDetail from './components/admin/bill/BillModel'
 import Service from "./components/admin/service/Service";
 import Apartment from "./components/admin/apartment/Apartment";
+import  Complain  from "./components/admin/complain/Complain";
 
 const Routes = () => {
 
@@ -31,9 +32,10 @@ const Routes = () => {
                         <Route exact path="/bill/:id">
                             <BillDetail />
                         </Route>
-                        <Route exact path="/service/:id">
-                            <Service />
+                        <Route exact path="/complain">
+                            <Complain />
                         </Route>
+                                     
 
                     </PrivateRoute>
                 </Switch>

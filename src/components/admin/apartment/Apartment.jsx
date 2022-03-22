@@ -6,11 +6,11 @@ import Content from "../../core/Content";
 
 const Apartment = () => {
   const [apartment, setApartment] = useState({});
-  const [services, setServices] = useState({});
-  const [finances, setFinances] = useState({});
-  const [billPaids, setBillPaids] = useState({});
-  const [billUnpaids, setBillUnpaid] = useState({});
-  const [cardBikes, setCardBikes] = useState({});
+  const [services, setServices] = useState([]);
+  const [finances, setFinances] = useState([]);
+  const [billPaids, setBillPaids] = useState([]);
+  const [billUnpaids, setBillUnpaid] = useState([]);
+  const [cardBikes, setCardBikes] = useState([]);
   const { data } = isAuthenticated();
   const idApartment = data.apartment_id;
 
@@ -42,18 +42,19 @@ const Apartment = () => {
   }, [idApartment]);
 
 
-  //billcardBikes
+  //bill
 
   useEffect(() => {
     try {
       const getFinances = async () => {
         const { data } = await getApartmentFinace(idApartment);
-        setFinances(data.data[0]);
+        setFinances(data.data);
       };
       getFinances();
     } catch (error) {
       console.log(error.message);
     }
+
   }, [idApartment]);
 
   //bill paid
@@ -62,6 +63,7 @@ const Apartment = () => {
       const getBillPaids = async () => {
         const { data } = await getBillPaid(idApartment);
         setBillPaids(data.data);
+        console.log(data.data);
       };
       getBillPaids();
     } catch (error) {
@@ -74,22 +76,21 @@ const Apartment = () => {
     try {
       const getBillUnpaids = async () => {
         const { data } = await getBillUnpaid(idApartment);
-        setBillUnpaid(data.data[0]);
+        setBillUnpaid(data.data);
       };
       getBillUnpaids();
     } catch (error) {
       console.log(error.message);
     }
   }, [idApartment]);
-  // card bike
 
+  // card bike
 
   useEffect(() => {
     try {
       const getCardBikes = async () => {
         const { data } = await getCardBike(idApartment);
-        setCardBikes(data.data[0]);
-        console.log(data.data[0]);
+        setCardBikes(data.data);
       };
       getCardBikes();
     } catch (error) {
@@ -205,17 +206,17 @@ const Apartment = () => {
                           </tr>
                         </thead>
                         <tbody>
-                          {" "}
-                          <tr>
-                            <td>{billPaids.id}</td>
-                            <td>{billPaids.ten_hoa_don}</td>
-                            <td>{billPaids.ten_chu_ho}</td>
-                            <td>{billPaids.apartment_id}</td>
-                            <td>{billPaids.amount}</td>
-                            <td>{billPaids.so_luong_hdct}</td>
+                          {billPaids.map((item) => (
+                            <tr key={item}>
+                              <td>{item.id}</td>
+                              <td>{item.ten_hoa_don}</td>
+                              <td>{item.ten_chu_ho}</td>
+                              <td>{item.apartment_id}</td>
+                              <td>{item.amount}</td>
+                              <td>{item.so_luong_hdct}</td>
+                            </tr>
+                          ))}
 
-                          </tr>
-                          {" "}
                         </tbody>
                       </table>
                     </div>
@@ -236,17 +237,18 @@ const Apartment = () => {
                           </tr>
                         </thead>
                         <tbody>
-                          {" "}
-                          <tr>
-                            <td>{billUnpaids.id}</td>
-                            <td>{billUnpaids.ten_hoa_don}</td>
-                            <td>{billUnpaids.ten_chu_ho}</td>
-                            <td>{billUnpaids.apartment_id}</td>
-                            <td>{billUnpaids.amount}</td>
-                            <td>{billUnpaids.so_luong_hdct}</td>
+                          {billUnpaids.map((item)=>(
+                             <tr key={item}>
+                            <td>{item.id}</td>
+                            <td>{item.ten_hoa_don}</td>
+                            <td>{item.ten_chu_ho}</td>
+                            <td>{item.apartment_id}</td>
+                            <td>{item.amount}</td>
+                            <td>{item.so_luong_hdct}</td>
 
                           </tr>
-                          {" "}
+                          ))}
+                         
                         </tbody>
                       </table>
                     </div>
@@ -271,20 +273,19 @@ const Apartment = () => {
                           </tr>
                         </thead>
                         <tbody>
-                          {" "}
-                          <tr >
-                            <td>{finances.id}</td>
-                            <td>{finances.ten_hoa_don}</td>
-                            <td>{finances.ten_chu_ho}</td>
-                            <td>{finances.apartment_id}</td>
-                            <td>{finances.amount}</td>
-                            <td>{finances.so_luong_hdct}</td>
-                            <td className="p-2 m-0">
-                              <Link to={`/bill/${idApartment}`} class="btn btn-rounded btn-outline-success">Chi tiết</Link>
-                            </td>
-                          </tr>
+                          {finances.map((item, index) => (
+                            <tr key={index}>
+                              <td>{item.id}</td>
+                              <td>{item.ten_hoa_don}</td>
+                              <td>{item.ten_chu_ho}</td>
+                              <td>{item.apartment_id}</td>
+                              <td>{item.amount}</td>
+                              <td>{item.so_luong_hdct}</td>
 
-                          {" "}
+                            </tr>
+                          ))}
+
+
                         </tbody>
                       </table>
                     </div>
@@ -332,14 +333,16 @@ const Apartment = () => {
                           </tr>
                         </thead>
                         <tbody>
-                          {" "}
-                          <tr>
-                            <td>{cardBikes.id}</td>
-                            <td>{cardBikes.name}</td>
-                            <td>{cardBikes.number}</td>
-                            <td>{services.so_luong_phuong_tien}</td>
-                          </tr>
-                          {" "}
+                        {cardBikes.map((item, index) => (
+                            <tr key={index}>
+                              <td>{item.id}</td>
+                              <td>{item.name}</td>
+                              <td>{item.number}</td>
+                              <td>{item.so_luong_phuong_tien}</td>
+
+                            </tr>
+                          ))}
+                  
                         </tbody>
                       </table>
                     </div>
